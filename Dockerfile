@@ -3,12 +3,14 @@ FROM python:3.10
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-WORKDIR /home/shreyansh.gupta/fastapi_deployment_tut/demo_project
+WORKDIR /code
 
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
-COPY ./src ./src
+
+COPY ./src ./src 
+COPY ./model_weights ./model_weights/
 
 EXPOSE 8000
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["gunicorn", "src.app:app", "workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]

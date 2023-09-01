@@ -12,7 +12,7 @@ from torch.nn.functional import softmax
   }
 
 """
-CACHE_DIR = "../model_weights"
+CACHE_DIR = "./model_weights"
 CLASS_MAPPING = ["clean", "mild gibberish", "noise", "word salad"]
 
 def getModel():

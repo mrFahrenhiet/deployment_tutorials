@@ -1,5 +1,4 @@
-from fastapi import FastAPI, status
-from typing import Union
+from fastapi import FastAPI
 from .model import pipeline
 
 app = FastAPI()

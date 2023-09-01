@@ -8,8 +8,7 @@ WORKDIR /code
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-COPY ./src ./src 
-COPY ./model_weights ./model_weights/
+COPY ./src ./src
 
 EXPOSE 8000
 

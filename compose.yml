@@ -3,8 +3,13 @@ services:
     restart: unless-stopped
     build: .
     container_name: gibberish-container
-    command: gunicorn main:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+    command: gunicorn src.app:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
     ports:
       - 8000:8000
     volumes:
       - .:/code
+    depends_on:
+      - redis
+  
+  redis:
+    image: redis:alpine
